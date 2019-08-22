@@ -8,6 +8,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Bankings_info
+from django.http import JsonResponse
 from django.db.models import Q
 
 from .serializer import bankSerializer
@@ -29,7 +30,7 @@ class BranchAutocomplete(APIView):
         if(serializer.data == ""):
             return Response(get_object_or_404())
         else:
-            return Response(serializer.data)
+            return JsonResponse(serializer.data)
 
 
 class Branches(APIView):
@@ -41,6 +42,6 @@ class Branches(APIView):
         lookup= (Q(city__iexact=query.upper())|Q(address__contains=query.upper())|Q(branch__contains=query.upper())|Q(district__contains=query.upper()))
         branch_data=branch_data.filter(lookup).distinct().order_by("ifsc")[int(offset):int(limit)]
         serialse=bankSerializer(branch_data,many=True)
-        return Response(serialse.data)
+        return JsonResponse(serializer.data)
 
 
