@@ -30,7 +30,7 @@ class BranchAutocomplete(APIView):
         if(serializer.data == ""):
             return Response(get_object_or_404())
         else:
-            return JsonResponse(serializer.data)
+            return Response(serializer.data)
 
 
 class Branches(APIView):
@@ -42,6 +42,6 @@ class Branches(APIView):
         lookup= (Q(city__iexact=query.upper())|Q(address__contains=query.upper())|Q(branch__contains=query.upper())|Q(district__contains=query.upper()))
         branch_data=branch_data.filter(lookup).distinct().order_by("ifsc")[int(offset):int(limit)]
         serialse=bankSerializer(branch_data,many=True)
-        return JsonResponse(serializer.data)
+        return Response(serializer.data)
 
 
