@@ -22,7 +22,6 @@ class BranchAutocomplete(APIView):
         limit=request.GET.get('limit')
         limit=int(limit)
         offset = request.GET.get('offset')
-
         bank_data = Bankings_info.objects.all()
         lookup = (Q(branch__istartswith=query.upper()) and Q(branch__contains=query.upper()))
         bank_data=bank_data.filter(lookup).distinct().order_by("ifsc")[int(offset):int(limit) + 1]
@@ -42,6 +41,6 @@ class Branches(APIView):
         lookup= (Q(city__iexact=query.upper())|Q(address__contains=query.upper())|Q(branch__contains=query.upper())|Q(district__contains=query.upper()))
         branch_data=branch_data.filter(lookup).distinct().order_by("ifsc")[int(offset):int(limit)]
         serialse=bankSerializer(branch_data,many=True)
-        return Response(serializer.data)
+        return Response(serialise.data)
 
 
