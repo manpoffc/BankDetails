@@ -25,7 +25,7 @@ SECRET_KEY = 'edos!ig^#-l607d!p=q4f-xd^pl=fxun+d=i1rv*vx)!=e@+wf'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['https://ffbankff.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
